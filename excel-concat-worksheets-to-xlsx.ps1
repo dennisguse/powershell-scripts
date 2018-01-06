@@ -75,10 +75,16 @@ ForEach ($inputFilename in $inputFilenames) {
       [void]$outputWorkbook.Sheets.Add([System.Reflection.Missing]::Value, $outputWorkbook.Sheets($outputWorkbook.Sheets.Count))
     }
 
-
     $outputWorksheet = $outputWorkbook.Sheets($inputWorksheetIndex)
+
     $lastRow = "A$($outputWorksheet.UsedRange.Rows.Count + 1)"
+    #There is always a first row, which might be empty and thus can be used.
+    if ($outputWorksheet.UsedRange.Rows.Count -eq 1 -and $Excel.WorksheetFunction.CountA($outputWorksheet.Range("1:1")) -eq 0) {
+      $lastRow = "A1"
+    }
+
     $range = $outputWorksheet.Range($lastRow)
+
     $outputWorksheet.Paste($range)
 
     Try {
