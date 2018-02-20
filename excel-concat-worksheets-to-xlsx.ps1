@@ -83,6 +83,16 @@ ForEach ($inputFilename in $inputFilenames) {
       $lastRow = "A1"
     }
 
+    #Determine the last empty row - brute force for president.
+    For ($i = $outputWorksheet.UsedRange.Rows.Count; $i -gt 1; $i--) {
+       if (!$Excel.WorksheetFunction.CountA($outputWorksheet.Range("$($i):$($i)")) -eq 0) {
+           $lastRow = "A$($i + 1)"
+           Break;
+       }
+    }
+
+    Write-Host "Pasting to "$lastRow
+
     $range = $outputWorksheet.Range($lastRow)
 
     $outputWorksheet.Paste($range)
