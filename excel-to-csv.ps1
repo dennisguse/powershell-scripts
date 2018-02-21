@@ -21,14 +21,14 @@ $workFolder = Split-Path $MyInvocation.MyCommand.Path
 If ($inputFilenames -eq $Null) {
   Write-Warning "No Excel-files (i.e., xls and xlsx) found in folder $workFolder"
 
-  Pause
+  CMD /C PAUSE #Powershell v1.0
   Exit
 }
 
 Write-Host "Going to split all Excel-files (i.e., xls and xlsx) from folder $workFolder`r`n"
 $inputFilenames
 Write-Host
-Pause
+CMD /C PAUSE #Powershell v1.0
 Write-Host
 
 $progress = 0
@@ -59,4 +59,4 @@ Write-Progress -Activity "progress" -Status "Completed" -Completed
 $Excel.Quit()
 
 Write-Host "`nDone."
-Pause
+CMD /C PAUSE #Powershell v1.0

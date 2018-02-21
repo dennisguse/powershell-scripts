@@ -32,14 +32,14 @@ $outputPath = Join-Path -Path $workFolder -ChildPath $outputFilename
 If ($inputFilenames -eq $Null) {
   Write-Warning "No Excel-files (i.e., csv, xls, and xlsx) found in folder $workFolder"
 
-  Pause
+  CMD /C PAUSE #Powershell v1.0
   Exit
 }
 
 Write-Host "Going to concatenate Excel-files (i.e., csv, xls, and xlsx) from folder $workFolder`r`n"
 $inputFilenames
 Write-Host "`r`nThe result will be saved as $outputFilename`r`n"
-Pause
+CMD /C PAUSE #Powershell v1.0
 Write-Host
 
 #Open up a new workbook
@@ -72,10 +72,10 @@ ForEach ($inputFilename in $inputFilenames) {
 
     $outputWorksheets = $outputWorkbook.Sheets
     For ($i = $outputWorkbook.Sheets.Count; $i -lt $inputWorksheetIndex; $i++) {
-      [void]$outputWorkbook.Sheets.Add([System.Reflection.Missing]::Value, $outputWorkbook.Sheets($outputWorkbook.Sheets.Count))
+      [void]$outputWorkbook.Sheets.Add([System.Reflection.Missing]::Value, $outputWorkbook.Sheets.Item($outputWorkbook.Sheets.Count))
     }
 
-    $outputWorksheet = $outputWorkbook.Sheets($inputWorksheetIndex)
+    $outputWorksheet = $outputWorkbook.Sheets.Item($inputWorksheetIndex)
 
     $lastRow = "A$($outputWorksheet.UsedRange.Rows.Count + 1)"
     #There is always a first row, which might be empty and thus can be used.
@@ -91,7 +91,7 @@ ForEach ($inputFilename in $inputFilenames) {
        }
     }
 
-    Write-Host "Pasting to "$lastRow
+    Write-Host "Pasting to $lastRow"
 
     $range = $outputWorksheet.Range($lastRow)
 
@@ -121,4 +121,4 @@ $outputWorkbook.Close()
 $Excel.Quit()
 
 Write-Host "`nDone"
-Pause
+CMD /C PAUSE #Powershell v1.0

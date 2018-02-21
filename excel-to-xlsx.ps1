@@ -28,14 +28,14 @@ $outputPath = Join-Path -Path $workFolder -ChildPath $outputFilename
 If ($inputFilenames -eq $Null) {
   Write-Warning "No Excel-files (i.e., csv, xls, and xlsx) found in folder $workFolder"
 
-  Pause
+  CMD /C PAUSE #Powershell v1.0
   Exit
 }
 
 Write-Host "Going to concatenate Excel-files (i.e., csv, xls, and xlsx) from folder $workFolder`r`n"
 $inputFilenames
 Write-Host "`r`nThe result will be stored into $outputFilename`r`n"
-Pause
+CMD /C PAUSE #Powershell v1.0
 Write-Host
 
 #Open up a new workbook
@@ -83,7 +83,7 @@ ForEach ($inputFilename in $inputFilenames) {
 Write-Progress -Activity "progress" -Status "Saving to $outputPath" -Completed
 
 #Cleanup - remove first (initial and empty) worksheet
-$outputWorkbook.Sheets(1).Delete()
+$outputWorkbook.Sheets.Item(1).Delete()
 
 Try {
   $outputWorkbook.SaveAs($outputPath)
@@ -97,4 +97,4 @@ $outputWorkbook.close()
 $Excel.Quit()
 
 Write-Host "`nDone."
-Pause
+CMD /C PAUSE #Powershell v1.0

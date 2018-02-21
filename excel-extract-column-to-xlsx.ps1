@@ -27,7 +27,7 @@ $workFolder = Split-Path $MyInvocation.MyCommand.Path
 If ($inputFilenames -eq $Null) {
   Write-Warning "No Excel-files (i.e., csv, xls, and xlsx) found in folder $workFolder"
 
-  Pause
+  CMD /C PAUSE #Powershell v1.0
   Exit
 }
 
@@ -39,13 +39,13 @@ if ($searchString.Length -eq 0) {
   If ($searchString -eq $Null -or $searchString.Length -eq 0 ) {
     Write-Warning "A search string is required"
 
-    Pause
+    CMD /C PAUSE #Powershell v1.0
     Exit
   }
 }
 Write-Host "Using search string $searchString"
 Write-Host
-Pause
+CMD /C PAUSE #Powershell v1.0
 Write-Host
 
 $progress = 0
@@ -102,4 +102,4 @@ $Excel.DisplayAlerts = $False #Hide clipboard warning.
 $Excel.Quit()
 
 Write-Host "`nDone."
-Pause
+CMD /C PAUSE #Powershell v1.0
