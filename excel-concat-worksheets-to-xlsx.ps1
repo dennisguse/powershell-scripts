@@ -20,7 +20,7 @@ param(
 $Excel = New-Object -ComObject Excel.Application
 $Excel.Visible = $False
 #Should warning or error dialogs be shown?
-$Excel.DisplayAlerts = $True
+$Excel.DisplayAlerts = $False
 
 Write-Host $MyInvocation.MyCommand.Name
 
