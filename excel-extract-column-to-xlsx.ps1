@@ -11,13 +11,14 @@ All files in the working directory (i.e., current directory) are processed.
 .PARAMETER searchString The string to be searched for.
 #>
 param(
+  [Parameter(Mandatory=$True,Position=1,ValueFromPipeline=$True,ValueFromPipelinebyPropertyName=$True)]
   [string]$searchString
 )
 
 $Excel = New-Object -ComObject Excel.Application
 $Excel.Visible = $False
 #Should warning or error dialogs be shown?
-$Excel.DisplayAlerts = $True
+$Excel.DisplayAlerts = $False
 
 Write-Host $MyInvocation.MyCommand.Name
 
@@ -33,16 +34,6 @@ If ($inputFilenames -eq $Null) {
 
 Write-Host "Going to extract one column of the Excel-files from folder $workFolder`r`n"
 $inputFilenames
-Write-Host
-if ($searchString.Length -eq 0) {
-  $searchString = Read-Host -Prompt "Please enter the search string (case insensitive)"
-  If ($searchString -eq $Null -or $searchString.Length -eq 0 ) {
-    Write-Warning "A search string is required"
-
-    CMD /C PAUSE #Powershell v1.0
-    Exit
-  }
-}
 Write-Host "Using search string $searchString"
 Write-Host
 CMD /C PAUSE #Powershell v1.0
