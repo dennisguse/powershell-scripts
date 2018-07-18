@@ -4,7 +4,7 @@ Dennis Guse, dennis.guse@alumni.tu-berlin.de
 
 .SYNOPSIS
 
-Splits Excel-files (i.e., xls and xlsx) into seperate CSV-files (one CSV-file per worksheet).
+Splits Excel-files (i.e., csv, xls, and xlsx) into seperate CSV-files (one CSV-file per worksheet - RFC4180).
 All files in the working directory (i.e., current directory) are processed.
 #>
 
@@ -15,7 +15,7 @@ $Excel.DisplayAlerts = $False
 
 Write-Host $MyInvocation.MyCommand.Name
 
-$inputFilenames = Get-ChildItem | Where-Object{ $_.Extension -ceq ".xls" -or $_.Extension -ceq ".xlsx"} | select -ExpandProperty FullName
+$inputFilenames = Get-ChildItem | Where-Object{$_Extension -ceq ".csv" -or $_.Extension -ceq ".xls" -or $_.Extension -ceq ".xlsx"} | select -ExpandProperty FullName
 $workFolder = Split-Path $MyInvocation.MyCommand.Path
 
 If ($inputFilenames -eq $Null) {
