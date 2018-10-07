@@ -45,7 +45,7 @@ ForEach ($inputFilename in $inputFilenames) {
     Write-Host $inputFilename":" $inputWorksheet.Name ">" $outputPath
 
     Try {
-      $inputWorksheet.SaveAs($outputPath, 6)
+      $inputWorksheet.SaveAs($outputPath, [Microsoft.Office.Interop.Excel.XlFileFormat]::xlCSV)
     } Catch {
       Write-Warning "Saving output to $outputPath failed"
     }
